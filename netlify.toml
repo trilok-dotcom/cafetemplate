@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm run build"
+  command = "pnpm install --no-frozen-lockfile && pnpm run build"
   publish = "artifacts/meloghrano-cafe/dist/public"
 
 [[redirects]]
