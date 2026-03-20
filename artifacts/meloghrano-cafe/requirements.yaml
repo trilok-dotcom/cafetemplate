@@ -1,0 +1,10 @@
+packages:
+  "framer-motion": "For scroll-triggered animations and fluid transitions"
+  "three": "Required core engine for the 3D hero section"
+  "@react-three/fiber": "React reconciler for Three.js used in the hero section"
+  "@react-three/drei": "Helpful abstractions and components for the 3D scene"
+
+notes:
+  - Using framer-motion for all scroll interactions
+  - The 3D scene uses basic geometries to avoid needing external asset loading
+  - Forms use local state and simulate API calls since no explicit backend schema was provided for reservations

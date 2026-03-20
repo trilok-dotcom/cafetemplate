@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Meloghrano Cafe"
+version = "1.0.0"
+id = "artifacts/meloghrano-cafe"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26044
+
+[services.development]
+run = "pnpm --filter @workspace/meloghrano-cafe run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/meloghrano-cafe", "run", "build" ]
+publicDir = "artifacts/meloghrano-cafe/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26044"
+BASE_PATH = "/"

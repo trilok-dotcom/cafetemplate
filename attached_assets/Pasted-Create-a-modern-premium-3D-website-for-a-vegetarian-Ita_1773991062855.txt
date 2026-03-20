@@ -1,0 +1,155 @@
+Create a modern, premium 3D website for a vegetarian Italian cafe brand named "Meloghrano Cafe".
+
+The design should feel aesthetic, cozy, and vibrant — inspired by pastel Italian cafes with a premium touch. The goal is to impress customers and increase reservations.
+
+### Core Requirements:
+
+* Fully responsive (mobile-first design, works perfectly on phone + desktop)
+* Smooth animations and 3D effects using modern libraries (Three.js / GSAP / Framer Motion)
+* Fast loading and clean UI
+* Soft pastel + warm color palette (peach, cream, sage green, soft red)
+
+---
+
+### Sections to include:
+
+#### 1. Hero Section (3D Experience)
+
+* 3D rotating gelato or pizza model
+* Tagline: "Pure Veg Italian Indulgence"
+* Subtext: "Handcrafted gelato, sourdough pizzas & cozy vibes"
+* CTA buttons:
+
+  * "View Menu"
+  * "Reserve Table"
+
+---
+
+#### 2. About Section
+
+* Short story about the cafe
+* Highlight:
+
+  * Authentic Italian veg cuisine
+  * Fresh ingredients
+  * Cozy aesthetic ambience
+
+---
+
+#### 3. Signature Menu (Interactive)
+
+* Categories:
+
+  * Gelato
+  * Pizzas
+  * Pasta
+  * Beverages
+  * Desserts
+
+* Each item card should have:
+
+  * Image
+  * Name
+  * Short description
+  * Hover animation
+
+---
+
+#### 4. Customer Favorites ⭐ (IMPORTANT)
+
+Create a visually attractive section based on reviews:
+
+* Lotus Biscoff Gelato
+* Sourdough Farmhouse Pizza
+* Hot Chocolate
+* Pesto Pasta
+* Nachos
+
+Add badges like:
+
+* "Most Loved"
+* "Must Try"
+* "Top Rated"
+
+---
+
+#### 5. Reviews Section
+
+* Show real-style testimonials (clean UI cards)
+* Include rating like "⭐ 4.6 from 600+ reviews"
+* Add smooth sliding animation
+
+---
+
+#### 6. Ambience Gallery
+
+* Grid layout with aesthetic cafe images
+* Hover zoom + soft transitions
+
+---
+
+#### 7. Reservation Section
+
+* Simple booking UI:
+
+  * Name
+  * Phone
+  * Date & Time
+* CTA: "Reserve Your Spot"
+
+---
+
+#### 8. Contact Section
+
+* Address (Banashankari, Bangalore)
+* Phone number
+* Google Maps embed
+* Opening hours
+
+---
+
+#### 9. Footer
+
+* Social media icons
+* Brand logo
+* Minimal clean design
+
+---
+
+### Extra Features:
+
+* Smooth scrolling
+* Parallax effects
+* Micro-interactions on hover
+* Sticky navbar with blur effect
+* Dark/light subtle theme blending
+
+---
+
+### Tone & Feel:
+
+* Cozy
+* Instagram-worthy
+* Premium but welcoming
+* Clean and modern
+
+---
+
+### Technical:
+
+* Use React
+* Use Tailwind CSS
+* Use animation libraries for smooth UX
+* Optimize images and responsiveness
+
+---
+
+### Final Goal:
+
+The website should feel like a high-end cafe brand and make visitors want to:
+
+1. Visit the cafe
+2. Order food
+3. Reserve a table
+
+Make it visually impressive enough that the cafe owner would want to buy this website.
