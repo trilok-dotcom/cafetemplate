@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col min-h-screen">
+    <main className="w-full flex flex-col min-h-screen pb-16 md:pb-0">
       <Navbar />
       <Hero />
       <About />
@@ -22,6 +22,16 @@ export default function Home() {
       <Reservation />
       <Contact />
       <Footer />
+
+      {/* Sticky Reserve Table button — mobile only */}
+      <div className="mobile-cta">
+        <a
+          href="#reservation"
+          className="w-full py-3.5 rounded-2xl bg-primary text-primary-foreground font-bold text-base text-center shadow-lg shadow-primary/30 pulse-glow"
+        >
+          Reserve a Table
+        </a>
+      </div>
     </main>
   );
 }

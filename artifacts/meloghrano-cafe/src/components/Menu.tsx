@@ -60,15 +60,15 @@ export default function Menu() {
           <p className="text-muted-foreground max-w-2xl mx-auto">Carefully curated vegetarian Italian classics and artisanal treats.</p>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        {/* Category tabs — horizontal scroll on mobile */}
+        <div className="flex overflow-x-auto hide-scrollbar justify-start sm:justify-center gap-3 mb-12 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
           {categories.map((cat) => (
             <motion.button
               key={cat}
               onClick={() => setActiveTab(cat)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+              className={`shrink-0 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                 activeTab === cat
                   ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
                   : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-primary/5"

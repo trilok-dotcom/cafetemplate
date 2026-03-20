@@ -43,7 +43,7 @@ export default function Reservation() {
 
   return (
     <section id="reservation" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 -z-10"><img src="https://images.unsplash.com/photo-1559329007-45c4cb169b12?w=1200&q=60" alt="" className="w-full h-full object-cover opacity-20" /><div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/80 to-secondary/20" /></div>
+      <div className="absolute inset-0 -z-10"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=60" alt="" className="w-full h-full object-cover opacity-20" loading="lazy" /><div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/80 to-secondary/20" /></div>
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 

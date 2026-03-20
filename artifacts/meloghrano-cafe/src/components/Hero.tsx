@@ -266,7 +266,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="h-[460px] lg:h-[580px] w-full relative"
+          className="h-[300px] sm:h-[400px] lg:h-[580px] w-full relative"
         >
           <AnimatedFoodVisual />
         </motion.div>

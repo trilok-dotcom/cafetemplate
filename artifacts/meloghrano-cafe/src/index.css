@@ -100,8 +100,11 @@
   }
 
   .masonry-grid {
-    column-count: 2;
+    column-count: 1;
     column-gap: 1rem;
+  }
+  @media (min-width: 480px) {
+    .masonry-grid { column-count: 2; }
   }
   @media (min-width: 768px) {
     .masonry-grid { column-count: 3; }
@@ -112,6 +115,32 @@
   .masonry-item {
     break-inside: avoid;
     margin-bottom: 1rem;
+  }
+
+  /* Mobile sticky reserve button */
+  .mobile-cta {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .mobile-cta {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      padding: 12px 16px;
+      background: rgba(255, 251, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(226, 109, 92, 0.15);
+    }
+  }
+
+  /* Touch-friendly tap targets */
+  @media (max-width: 767px) {
+    button, a[href] {
+      min-height: 44px;
+    }
   }
   
   .glass-nav {

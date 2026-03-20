@@ -1,0 +1,118 @@
+Optimize the entire website for mobile-first responsive design. The current design looks like a desktop layout squeezed into mobile — fix this completely.
+
+---
+
+### 📱 MOBILE-FIRST LAYOUT (CRITICAL)
+
+* Redesign all sections for small screens first (320px–480px)
+* Convert layouts into:
+
+  * Single column
+  * Vertical stacking
+* Add proper spacing between elements (padding & margins)
+
+---
+
+### 📏 RESPONSIVE BREAKPOINTS
+
+Implement proper breakpoints:
+
+* Mobile: 320px – 480px
+* Tablet: 481px – 768px
+* Desktop: 769px+
+
+Use Tailwind responsive classes or CSS media queries
+
+---
+
+### 🧭 NAVBAR (MOBILE FIX)
+
+* Convert navbar into:
+
+  * Hamburger menu
+* Add smooth slide-in menu animation
+* Make buttons large and touch-friendly
+
+---
+
+### 🖼️ IMAGE OPTIMIZATION
+
+* Make all images:
+
+  * width: 100%
+  * height: auto
+* Add lazy loading
+* Compress images for faster loading
+
+---
+
+### 🧱 FLEXIBLE LAYOUT (IMPORTANT)
+
+* Replace fixed widths with:
+
+  * flexbox or grid
+* Avoid px-based sizing → use %, vw, rem
+
+---
+
+### ✨ MOBILE ANIMATIONS (OPTIMIZED)
+
+* Reduce heavy 3D effects on mobile
+* Keep:
+
+  * fade-in
+  * slide-up
+* Disable heavy GPU animations for better performance
+
+---
+
+### 👆 TOUCH-FRIENDLY UI
+
+* Buttons minimum size: 48px
+* Add spacing between clickable elements
+* Add smooth tap feedback animations
+
+---
+
+### 🍽️ MENU SECTION (MOBILE UX)
+
+* Convert menu cards into:
+
+  * swipeable horizontal scroll
+* Add snap scrolling
+
+---
+
+### ⭐ CUSTOMER FAVORITES
+
+* Stack cards vertically
+* Add scroll animation (fade + slide)
+
+---
+
+### 📍 CONTACT & RESERVATION
+
+* Make form full-width
+* Inputs large and easy to tap
+* Add sticky "Reserve Table" button at bottom
+
+---
+
+### ⚡ PERFORMANCE BOOST
+
+* Lazy load images
+* Reduce JS bundle size
+* Optimize animations
+
+---
+
+### 🎯 FINAL GOAL
+
+* Website should feel:
+
+  * Smooth on mobile
+  * Fast loading
+  * Easy to navigate with one hand
+* No overlapping, no zooming required
+
+Make mobile experience equal or better than desktop.
