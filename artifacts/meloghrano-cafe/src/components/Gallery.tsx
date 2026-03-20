@@ -4,13 +4,13 @@ import { X, ZoomIn } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
 const galleryItems = [
-  { id: 1, title: "Artisanal Gelato", img: "https://images.unsplash.com/photo-1580502304784-8bacd7bdada4?w=600&q=80", height: "h-64" },
+  { id: 1, title: "Artisanal Gelato", img: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80", height: "h-64" },
   { id: 2, title: "Sourdough Pizza", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80", height: "h-96" },
   { id: 3, title: "Cozy Interior", img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80", height: "h-72" },
   { id: 4, title: "Tiramisu", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80", height: "h-64" },
   { id: 5, title: "Cappuccino Art", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80", height: "h-80" },
   { id: 6, title: "Fresh Pasta", img: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80", height: "h-64" },
-  { id: 7, title: "Cafe Ambience", img: "https://images.unsplash.com/photo-1559329007-45c4cb169b12?w=600&q=80", height: "h-72" },
+  { id: 7, title: "Cafe Ambience", img: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600&q=80", height: "h-72" },
   { id: 8, title: "Dessert Spread", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80", height: "h-96" },
 ];
 
