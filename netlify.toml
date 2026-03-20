@@ -1,0 +1,8 @@
+[build]
+  command = "pnpm run build"
+  publish = "artifacts/meloghrano-cafe/dist/public"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
