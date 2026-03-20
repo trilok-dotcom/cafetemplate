@@ -1,0 +1,147 @@
+Upgrade the existing cafe website into a highly interactive 3D experience with rich animations, dynamic images, and premium UI.
+
+DO NOT keep it basic. Make it feel like an award-winning modern 3D website.
+
+---
+
+### 🔥 HERO SECTION (MAJOR UPGRADE)
+
+* Replace static hero with:
+
+  * 3D rotating gelato or pizza (using Three.js or React Three Fiber)
+  * Mouse movement should slightly rotate the object
+  * Add floating particles in background
+* Add animated gradient background (soft pastel shifting colors)
+* Add text animation:
+
+  * Fade + slide-up on load
+  * Slight glowing effect
+
+---
+
+### ✨ SCROLL ANIMATIONS (VERY IMPORTANT)
+
+* Add smooth scroll-based animations:
+
+  * Sections fade + slide in
+  * Images scale slightly when entering viewport
+  * Text appears with stagger effect
+* Add parallax scrolling (background moves slower than content)
+
+---
+
+### 🍽️ MENU SECTION (MAKE IT PREMIUM)
+
+* Convert menu into:
+
+  * Horizontal scroll or card carousel
+* Add hover effects:
+
+  * Cards lift in 3D (scale + rotate slightly)
+  * Show details on hover
+* Add category filter tabs with smooth transitions
+
+---
+
+### ⭐ CUSTOMER FAVORITES (MAKE IT POP)
+
+* Add glowing badges:
+
+  * "🔥 Most Loved"
+  * "⭐ Top Rated"
+* Cards should have:
+
+  * Hover zoom
+  * Smooth shadow glow
+  * Micro animation (pulse effect)
+
+---
+
+### 🖼️ AUTO IMAGE INTEGRATION (IMPORTANT)
+
+* Fetch high-quality food images automatically:
+
+  * Use Unsplash API or Pexels API
+  * Keywords:
+
+    * "gelato dessert aesthetic"
+    * "italian pizza sourdough"
+    * "cafe aesthetic interior"
+* Images should:
+
+  * Lazy load
+  * Have smooth fade-in effect
+  * Slight zoom on hover
+
+---
+
+### 🧊 GLASSMORPHISM UI
+
+* Add glass effect cards:
+
+  * Blur background
+  * Soft shadows
+  * Rounded corners
+* Use for:
+
+  * Menu cards
+  * Reviews
+  * Reservation section
+
+---
+
+### 💬 REVIEWS SECTION (UPGRADE)
+
+* Add auto sliding carousel
+* Add star animation
+* Add subtle floating animation to cards
+
+---
+
+### 🎥 PAGE TRANSITIONS
+
+* Add smooth page/section transitions:
+
+  * Fade + blur transitions
+  * Smooth anchor scrolling
+
+---
+
+### 🧭 NAVBAR UPGRADE
+
+* Sticky navbar with:
+
+  * Blur background
+  * Shrinks on scroll
+* Add hover underline animation
+
+---
+
+### 📱 MOBILE EXPERIENCE (CRITICAL)
+
+* Optimize all animations for mobile:
+
+  * Reduce heavy 3D load
+  * Keep interactions smooth
+* Make touch interactions (swipe cards, etc.)
+
+---
+
+### ⚡ PERFORMANCE
+
+* Optimize 3D models (low poly)
+* Lazy load images
+* Use GPU acceleration
+
+---
+
+### 🎯 FINAL FEEL
+
+* Should feel like:
+
+  * A premium cafe brand website
+  * Interactive and immersive
+  * Smooth, modern, and aesthetic
+* NOT like a template
+
+Make it visually impressive enough that a cafe owner would be excited to buy it instantly.

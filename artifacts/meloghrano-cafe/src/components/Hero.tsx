@@ -1,222 +1,287 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Stars } from "@react-three/drei";
-import { motion } from "framer-motion";
-import { ArrowRight, Star, IceCream, Pizza } from "lucide-react";
-import { useRef, useState, Suspense } from "react";
-import * as THREE from "three";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { ArrowRight, Star, ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-function GelatoModel() {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.5;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1.5}>
-      <group ref={groupRef} position={[0, -0.5, 0]} scale={1.2}>
-        <mesh position={[0, -1.2, 0]}>
-          <coneGeometry args={[1, 2.5, 32]} />
-          <meshStandardMaterial color="#D2A679" roughness={0.9} />
-        </mesh>
-        <mesh position={[0, 0.5, 0]}>
-          <sphereGeometry args={[1.05, 32, 32]} />
-          <meshStandardMaterial color="#8BA888" roughness={0.3} />
-        </mesh>
-        <mesh position={[0.2, 1.4, -0.2]} rotation={[0.2, 0, 0.1]}>
-          <sphereGeometry args={[0.9, 32, 32]} />
-          <meshStandardMaterial color="#E26D5C" roughness={0.3} />
-        </mesh>
-        <mesh position={[0, 0.1, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[1.0, 0.15, 16, 32]} />
-          <meshStandardMaterial color="#4A3B32" roughness={0.5} />
-        </mesh>
-      </group>
-    </Float>
-  );
+// Floating particle
+function Particle({ style }: { style: React.CSSProperties }) {
+  return <div className="absolute rounded-full pointer-events-none" style={style} />;
 }
 
-function ThreeDScene() {
-  return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} color="#FFFBF5" />
-      <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#E26D5C" />
-      <Suspense fallback={null}>
-        <GelatoModel />
-        <Stars radius={20} depth={50} count={500} factor={4} saturation={0.5} fade speed={1} />
-      </Suspense>
-      <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1} />
-    </Canvas>
-  );
-}
+// Animated 3D food visual using CSS transforms
+function AnimatedFoodVisual() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-function GelatoFallback() {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      <div className="relative">
-        <motion.div
-          animate={{ y: [-10, 10, -10], rotate: [-3, 3, -3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="relative"
-        >
-          <div className="w-48 h-48 rounded-full bg-gradient-to-br from-[#8BA888] to-[#6a9168] shadow-2xl shadow-green-300/40 flex items-center justify-center relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1/3 bg-white/20 rounded-t-full" />
-            <IceCream className="w-20 h-20 text-white drop-shadow-lg" />
-          </div>
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-[#E26D5C] to-[#c45240] shadow-xl shadow-red-300/40 flex items-center justify-center overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1/3 bg-white/20 rounded-t-full" />
-            <Pizza className="w-14 h-14 text-white drop-shadow-lg" />
-          </div>
-        </motion.div>
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      setMouse({
+        x: ((e.clientX - cx) / rect.width) * 30,
+        y: ((e.clientY - cy) / rect.height) * -30,
+      });
+    };
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
 
+  return (
+    <div ref={containerRef} className="relative w-full h-full flex items-center justify-center">
+      {/* Main rotating plate */}
+      <motion.div
+        animate={{ rotateY: [0, 360] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        style={{
+          transform: `perspective(800px) rotateX(${mouse.y * 0.3}deg) rotateY(${mouse.x * 0.3}deg)`,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative"
+      >
+        {/* Outer glow ring */}
         <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
+          animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute -top-16 -right-16 w-24 h-24 rounded-full bg-gradient-to-br from-[#F4A261] to-[#e8893d] shadow-lg opacity-80 flex items-center justify-center text-3xl"
-        >
-          🍕
-        </motion.div>
+          className="absolute inset-0 rounded-full bg-primary/20 blur-3xl -m-12"
+        />
+
+        {/* Main gelato cone */}
         <motion.div
-          animate={{ scale: [1.05, 1, 1.05] }}
-          transition={{ duration: 3.5, repeat: Infinity }}
-          className="absolute -bottom-8 -left-16 w-20 h-20 rounded-full bg-gradient-to-br from-[#8BA888] to-[#6a9168] shadow-lg opacity-80 flex items-center justify-center text-2xl"
+          animate={{ y: [-8, 8, -8] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="relative z-10"
         >
-          🍝
+          {/* Cone shape via CSS */}
+          <div className="flex flex-col items-center">
+            {/* Top scoop (red) */}
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#E26D5C] via-[#d05545] to-[#be4030] shadow-2xl relative overflow-hidden flex items-center justify-center text-5xl -mb-4 z-20">
+              <div className="absolute top-2 left-4 w-6 h-6 rounded-full bg-white/25" />
+              <div className="absolute top-6 left-6 w-3 h-3 rounded-full bg-white/15" />
+              🍓
+            </div>
+            {/* Bottom scoop (green) */}
+            <div className="w-40 h-40 rounded-full bg-gradient-to-br from-[#8BA888] via-[#7a9e77] to-[#6a8d65] shadow-2xl relative overflow-hidden flex items-center justify-center text-6xl z-10">
+              <div className="absolute top-3 left-5 w-8 h-8 rounded-full bg-white/20" />
+              <div className="absolute top-8 left-8 w-4 h-4 rounded-full bg-white/10" />
+              🍦
+            </div>
+            {/* Cone */}
+            <div
+              className="w-0 h-0 z-30 -mt-2"
+              style={{
+                borderLeft: "50px solid transparent",
+                borderRight: "50px solid transparent",
+                borderTop: "90px solid #D2A679",
+                filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.2))",
+              }}
+            />
+          </div>
         </motion.div>
+      </motion.div>
+
+      {/* Orbiting items */}
+      {[
+        { emoji: "🍕", color: "#E26D5C", size: 64, orbit: 180, speed: 12, delay: 0 },
+        { emoji: "🍝", color: "#8BA888", size: 56, orbit: 200, speed: 15, delay: -5 },
+        { emoji: "☕", color: "#D2A679", size: 48, orbit: 160, speed: 10, delay: -3 },
+        { emoji: "🍰", color: "#F4A261", size: 52, orbit: 220, speed: 18, delay: -7 },
+      ].map((item, i) => (
         <motion.div
-          animate={{ y: [-5, 5, -5] }}
-          transition={{ duration: 2.5, repeat: Infinity }}
-          className="absolute top-8 -left-20 w-16 h-16 rounded-full bg-gradient-to-br from-[#D2A679] to-[#b8864d] shadow-lg opacity-80 flex items-center justify-center text-xl"
+          key={i}
+          animate={{ rotate: 360 }}
+          transition={{ duration: item.speed, repeat: Infinity, ease: "linear", delay: item.delay }}
+          className="absolute inset-0 flex items-start justify-center"
+          style={{ transformOrigin: "center center" }}
         >
-          🍦
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: item.speed, repeat: Infinity, ease: "linear", delay: item.delay }}
+            className="rounded-full flex items-center justify-center text-2xl shadow-xl"
+            style={{
+              width: item.size,
+              height: item.size,
+              backgroundColor: item.color + "33",
+              border: `2px solid ${item.color}66`,
+              marginTop: -item.orbit / 2,
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            {item.emoji}
+          </motion.div>
         </motion.div>
+      ))}
+
+      {/* Floating sparkles */}
+      {[...Array(12)].map((_, i) => (
         <motion.div
-          animate={{ y: [5, -5, 5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute -bottom-4 -right-12 w-14 h-14 rounded-full bg-gradient-to-br from-[#E26D5C] to-[#c45240] shadow-lg opacity-70 flex items-center justify-center text-xl"
-        >
-          ☕
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-class WebGLErrorBoundary extends Error {}
-
-function ThreeDCanvasWithFallback() {
-  const [webglFailed, setWebglFailed] = useState(false);
-
-  if (webglFailed) {
-    return <GelatoFallback />;
-  }
-
-  return (
-    <div className="w-full h-full" onError={() => setWebglFailed(true)}>
-      <div className="w-full h-full" style={{ position: 'relative' }}>
-        {(() => {
-          try {
-            return <ThreeDScene />;
-          } catch {
-            return <GelatoFallback />;
-          }
-        })()}
-      </div>
+          key={i}
+          className="absolute w-2 h-2 rounded-full"
+          style={{
+            backgroundColor: ["#E26D5C", "#8BA888", "#F4A261", "#D2A679"][i % 4],
+            left: `${10 + (i * 7) % 80}%`,
+            top: `${5 + (i * 13) % 90}%`,
+          }}
+          animate={{
+            y: [-10, 10, -10],
+            x: [-5, 5, -5],
+            opacity: [0.4, 1, 0.4],
+            scale: [0.8, 1.4, 0.8],
+          }}
+          transition={{
+            duration: 2 + (i * 0.3),
+            repeat: Infinity,
+            delay: i * 0.2,
+          }}
+        />
+      ))}
     </div>
   );
 }
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen pt-20 pb-16 flex items-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/50 to-primary/5 -z-20" />
-      <div className="absolute top-1/4 -right-64 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px] -z-10" />
-      <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-secondary/10 blur-[80px] -z-10" />
+    <section
+      id="home"
+      className="relative min-h-screen pt-20 flex items-center overflow-hidden"
+    >
+      {/* Animated multi-gradient background */}
+      <div
+        className="absolute inset-0 -z-20 animate-gradient"
+        style={{
+          background: "linear-gradient(135deg, hsl(40 50% 98%), hsl(3 72% 95%), hsl(40 50% 97%), hsl(114 18% 93%), hsl(16 88% 96%))",
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div className="pt-12 lg:pt-0 z-10 text-center lg:text-left">
+      {/* Floating background particles */}
+      {[
+        { width: 320, height: 320, top: "10%", left: "5%", color: "rgba(226,109,92,0.08)", blur: "80px", duration: "8s", delay: "0s" },
+        { width: 400, height: 400, top: "60%", right: "5%", color: "rgba(139,168,136,0.08)", blur: "100px", duration: "10s", delay: "-3s" },
+        { width: 250, height: 250, bottom: "10%", left: "20%", color: "rgba(244,162,97,0.08)", blur: "60px", duration: "7s", delay: "-5s" },
+        { width: 200, height: 200, top: "30%", right: "30%", color: "rgba(210,166,121,0.06)", blur: "50px", duration: "9s", delay: "-2s" },
+      ].map((p, i) => (
+        <Particle
+          key={i}
+          style={{
+            width: p.width,
+            height: p.height,
+            top: p.top,
+            left: (p as any).left,
+            right: (p as any).right,
+            bottom: (p as any).bottom,
+            backgroundColor: p.color,
+            filter: `blur(${p.blur})`,
+            ["--duration" as any]: p.duration,
+            ["--delay" as any]: p.delay,
+            zIndex: -1,
+          } as React.CSSProperties}
+        />
+      ))}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center py-16">
+
+        {/* Text Side */}
+        <div className="text-center lg:text-left z-10">
+
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6"
+            transition={{ duration: 0.7 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-6 glass border border-primary/20"
           >
-            <Star className="w-4 h-4 fill-primary" />
-            <span>Bangalore's Premier Veg Italian</span>
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <span className="text-sm font-semibold text-foreground">Bangalore's Premier Veg Italian</span>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-[1.1] text-foreground mb-6"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.05] text-foreground mb-6"
           >
-            Pure Veg <span className="text-primary italic">Italian</span> <br />
+            Pure Veg{" "}
+            <span className="text-gradient italic">Italian</span>
+            <br />
             Indulgence
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
           >
-            Handcrafted artisanal gelato, authentic sourdough pizzas, and cozy aesthetic vibes right in the heart of Banashankari.
+            Handcrafted artisanal gelato, authentic sourdough pizzas & cozy aesthetic vibes right in the heart of Banashankari.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
           >
             <a
               href="#reservation"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
+              className="group px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold text-lg pulse-glow hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-xl shadow-primary/30"
             >
               Reserve Table
+              <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>→</motion.span>
             </a>
             <a
               href="#menu"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-background border-2 border-primary/20 text-foreground font-semibold text-lg hover:border-primary hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 group"
+              className="px-8 py-4 rounded-full glass border-2 border-primary/20 text-foreground font-semibold text-lg hover:border-primary hover:bg-primary/5 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
-              Explore Menu
+              View Menu
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>
 
+          {/* Stats */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-12 flex items-center gap-6 justify-center lg:justify-start"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="flex flex-wrap gap-6 justify-center lg:justify-start"
           >
-            <div className="flex -space-x-3">
-              {["#E26D5C", "#8BA888", "#F4A261", "#D2A679"].map((color, i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-background flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: color }}>
-                  {["A", "R", "S", "M"][i]}
-                </div>
-              ))}
-            </div>
-            <div>
-              <div className="flex text-yellow-400 text-sm">★★★★★</div>
-              <p className="text-sm text-muted-foreground"><strong className="text-foreground">4.6</strong> from 600+ reviews</p>
-            </div>
+            {[
+              { number: "600+", label: "Happy Reviews" },
+              { number: "4.8★", label: "Google Rating" },
+              { number: "50+", label: "Italian Dishes" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center lg:text-left">
+                <div className="text-2xl font-display font-bold text-primary">{stat.number}</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+              </div>
+            ))}
           </motion.div>
         </div>
 
+        {/* Visual Side */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="h-[420px] lg:h-[560px] w-full relative"
+          className="h-[460px] lg:h-[580px] w-full relative"
         >
-          <GelatoFallback />
+          <AnimatedFoodVisual />
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground cursor-pointer"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+      >
+        <span className="text-xs uppercase tracking-widest font-medium">Scroll</span>
+        <ChevronDown className="w-5 h-5" />
+      </motion.div>
     </section>
   );
 }

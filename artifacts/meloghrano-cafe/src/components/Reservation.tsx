@@ -42,15 +42,15 @@ export default function Reservation() {
   }
 
   return (
-    <section id="reservation" className="py-24 bg-muted relative">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMCwwLDAsMC4wNSkiLz48L3N2Zz4=')] [mask-image:linear-gradient(to_bottom,white,transparent)]" />
+    <section id="reservation" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 -z-10"><img src="https://images.unsplash.com/photo-1559329007-45c4cb169b12?w=1200&q=60" alt="" className="w-full h-full object-cover opacity-20" /><div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/80 to-secondary/20" /></div>
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-card rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-border/50"
+          className="glass rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-white/30"
         >
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
@@ -71,7 +71,7 @@ export default function Reservation() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 rounded-xl bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
                 />
               </div>
 
@@ -84,7 +84,7 @@ export default function Reservation() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="+91 98765 43210"
-                  className="w-full px-4 py-3 rounded-xl bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
                 />
               </div>
 
@@ -98,7 +98,7 @@ export default function Reservation() {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all"
                 />
               </div>
 
@@ -111,7 +111,7 @@ export default function Reservation() {
                     name="time"
                     value={formData.time}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none"
+                    className="w-full px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none"
                   >
                     {timeSlots.map(time => (
                       <option key={time} value={time}>{time}</option>
@@ -127,7 +127,7 @@ export default function Reservation() {
                     name="guests"
                     value={formData.guests}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none"
+                    className="w-full px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all appearance-none"
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
                       <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
@@ -146,7 +146,7 @@ export default function Reservation() {
                 onChange={handleChange}
                 placeholder="Anniversary, allergies, preferred seating..."
                 rows={3}
-                className="w-full px-4 py-3 rounded-xl bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all resize-none"
               ></textarea>
             </div>
 
